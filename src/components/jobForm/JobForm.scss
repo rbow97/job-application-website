@@ -1,0 +1,59 @@
+@import "../helpers/mixins.scss";
+@import "../helpers/variables.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  font-family: "Josefin Sans";
+
+  &--title {
+    font-family: "Josefin Sans";
+    white-space: pre-wrap;
+    font-weight: bold;
+    @include fluid-type(
+      $min-width,
+      $max-width,
+      $form-title-min-font,
+      $form-title-max-font
+    );
+  }
+
+  &--job {
+    font-family: "Josefin Sans";
+    font-weight: bold;
+  }
+
+  &--company {
+    font-weight: bold;
+  }
+
+  &--location {
+    font-weight: bold;
+  }
+
+  &--status {
+    font-weight: bold;
+  }
+
+  &--notes {
+    font-weight: bold;
+    flex-grow: 1;
+    &__input {
+      width: 100% !important;
+      height: 100% !important;
+      resize: both;
+      border-color: $form-grey;
+      resize: none;
+      border-radius: 5px;
+    }
+  }
+
+  &--button {
+    grid-area: "button";
+  }
+}
+
+.dropdown {
+  background-color: grey;
+  border-radius: 5px;
+}

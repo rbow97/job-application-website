@@ -1,0 +1,24 @@
+.pie-chart {
+  width: fit-content !important;
+  height: 100% !important;
+  //   flex-grow: 1;
+}
+
+.recharts {
+  &-wrapper {
+    height: 100% !important;
+    width: fit-content !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-surface {
+    width: 70% !important;
+    height: 100% !important;
+  }
+
+  &-pie {
+    height: 100% !important;
+  }
+}
