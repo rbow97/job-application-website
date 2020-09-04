@@ -16,6 +16,7 @@ const Landing = (props) => {
   const [editObj, setEditObj] = useState();
 
   const text = "Job\n Application";
+  const subheaderText = "Welcome to your job applications dashboard!";
 
   const handleShowEdit = (obj) => {
     setShowEdit(true);
@@ -116,50 +117,17 @@ const Landing = (props) => {
       {modalToRender}
       <div
         style={{ fontFamily: "Josefin Sans, sansSerif" }}
-        className="container-fluid p-0 pl-sm-15 pr-sm-15"
+        className="container p-0 pl-sm-15 pr-sm-15"
       >
-        <div className="row ml-2 mr-2 mt-4">
-          <div className="header col-md-6 col-12 align-self-start">
+        <div className="row ml-2 mr-2 mt-4 pb-4">
+          <div className="header col-12 align-self-start">
             <h1 className="header--title d-inline-flex">
               Occupation Applications
             </h1>
-            <h2 className="header--subtitle d-inline-flex">
-              Welcome to your job applications dashboard!
-            </h2>
-          </div>
-          <div className="statistics pl-4 pr-4 pl-md-0 pr-md-0 col-12 mt-4 mt-md-0 col-md-6 pl-md-5 d-flex justify-content-around flex-column p-0">
-            <div className="d-flex flex-row">
-              <div className="statistics--progress flex-grow-1 h-100 mr-1 p-2 pl-sm-4 pr-sm-4">
-                <div className="statistics--progress__num">
-                  {inProgressLength}
-                </div>
-                <div className="statistics--progress__text justify-content-center">
-                  <span>Applications</span>
-                  <span>in Progress</span>
-                </div>
-              </div>
-              <div className="d-flex d-none total-jobs-chart align-items-center justify-content-center">
-                <ProgressJobsChart data={props.posts} />
-              </div>
-            </div>
-
-            <div className="d-flex flex-row mt-4">
-              <div className="statistics--total flex-grow-1 h-100 mt-sm-3 ml-1 p-2 pl-sm-4 pr-sm-4">
-                <div className="statistics--total__num">
-                  {props.posts.length}
-                </div>
-                <div className="statistics--total__text justify-content-center">
-                  <span>Total</span>
-                  <span>Applications</span>
-                </div>
-              </div>
-              <div className="d-flex flex-grow-1 mt-sm-3 total-jobs-chart align-items-center justify-content-center">
-                <TotalJobsChart data={props.posts} />
-              </div>
-            </div>
+            <h2 className="header--subtitle d-inline-flex">{subheaderText}</h2>
           </div>
         </div>
-        <div className="row mt-5 pl-3 pr-3">
+        <div className="row">
           <div className="col-12 col-md-6 applications">
             <div className="applications--header d-flex flex-row justify-content-between">
               <div className="applications--header__title">Applications</div>
@@ -175,24 +143,58 @@ const Landing = (props) => {
             </div>
             <div className="posts">{postsOutput}</div>
           </div>
-          <div className="resources col-12 col-md-6 pl-md-5">
-            <div className="resources--header"> Useful Resources</div>
-            <ul className="resources--links p-3 mt-3">
-              <li>
-                <a href="#">Resource 1</a>
-              </li>
-              <li>
-                <a href="#">Resource 2</a>
-              </li>
-              <li>
-                <a href="#">Resource 3</a>
-              </li>
-              <li>
-                <a href="#">Resource 4</a>
-              </li>
-            </ul>
+          <div className="col-md-6 col-12 pt-1 pt-md-5">
+            <div className="statistics pl-2 col-12 mt-4 mt-md-0 pl-md-4 d-flex justify-content-around flex-column p-0">
+              <div className="d-flex flex-row justify-content-around">
+                <div className="statistics--padding">
+                  <div className="statistics--progress mr-1 p-2 pl-sm-4 pr-sm-4">
+                    <div className="statistics--progress__num">
+                      {inProgressLength}
+                    </div>
+                    <div className="statistics--progress__text justify-content-center">
+                      <span>Applications</span>
+                      <span>in Progress</span>
+                    </div>
+                  </div>
+                </div>
+                <ProgressJobsChart data={props.posts} />
+              </div>
+
+              <div className="d-flex flex-row justify-content-around mt-2">
+                <div className="statistics--padding">
+                  <div className="statistics--total mt-sm-3 ml-1 p-2 pl-sm-4 pr-sm-4">
+                    <div className="statistics--total__num">
+                      {props.posts.length}
+                    </div>
+                    <div className="statistics--total__text justify-content-center">
+                      <span>Total</span>
+                      <span>Applications</span>
+                    </div>
+                  </div>
+                </div>
+                <TotalJobsChart data={props.posts} />
+              </div>
+            </div>
+            <div className="resources pt-4 pt-md-3">
+              <div className="resources--header"> Useful Resources</div>
+              <ul className="resources--links p-3 mt-3">
+                <li>
+                  <a href="#">Resource 1</a>
+                </li>
+                <li>
+                  <a href="#">Resource 2</a>
+                </li>
+                <li>
+                  <a href="#">Resource 3</a>
+                </li>
+                <li>
+                  <a href="#">Resource 4</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
+        <div className="row mt-5 pl-3 pr-3"></div>
       </div>
     </div>
   );

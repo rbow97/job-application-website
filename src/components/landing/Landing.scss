@@ -25,6 +25,7 @@ html {
   border-radius: 15px;
   padding: 3vw;
   &--title {
+    white-space: pre-wrap;
     font-weight: bold;
     letter-spacing: 3px;
 
@@ -37,6 +38,7 @@ html {
   }
 
   &--subtitle {
+    white-space: pre-wrap;
     @include fluid-type(
       $min-width,
       $max-width,
@@ -50,11 +52,16 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  &--padding {
+    width: 80% !important;
+    display: flex;
+    justify-content: center;
+  }
 
   &--total,
   &--progress {
+    width: fit-content;
     display: flex;
-    align-self: flex-start;
     justify-content: center;
     align-items: center;
     background: #e5e5e5;
