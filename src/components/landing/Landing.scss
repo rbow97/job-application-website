@@ -53,7 +53,7 @@ html {
   flex-direction: column;
   justify-content: space-between;
   &--padding {
-    width: 80% !important;
+    width: 70%;
     display: flex;
     justify-content: center;
   }
@@ -141,7 +141,8 @@ html {
 .button {
   &--delete,
   &--edit,
-  &--add {
+  &--add,
+  &--filter {
     color: white;
     padding: 5px;
     border-radius: 5px;
@@ -171,7 +172,10 @@ html {
 
   &--add {
     color: black;
-    border: 1px solid black;
+  }
+
+  &--filter {
+    font-size: 10px !important;
   }
 }
 
@@ -205,4 +209,14 @@ html {
       text-decoration: none;
     }
   }
+}
+
+.dropdown-toggle,
+.dropdown-menu {
+  @include fluid-type(
+    $min-width,
+    $max-width,
+    $button-min-font-size,
+    $button-max-font-size
+  );
 }

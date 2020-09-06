@@ -6,7 +6,7 @@ import JobForm from "../jobForm/JobForm";
 import EditJob from "../jobForm/EditJob";
 import ProgressJobsChart from "../animations/ProgressJobsChart";
 import TotalJobsChart from "../animations/TotalJobsChart";
-import { Modal } from "react-bootstrap";
+import { Modal, DropdownButton, Dropdown } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as actionCreators from "../store/actions/actionCreators";
 
@@ -14,6 +14,7 @@ const Landing = (props) => {
   const [show, setShow] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [editObj, setEditObj] = useState();
+  const [dropdown, setDropdown] = useState("All");
 
   const text = "Job\n Application";
   const subheaderText = "Welcome to your job applications dashboard!";
@@ -29,6 +30,7 @@ const Landing = (props) => {
 
   let postsOutput = null;
   let modalToRender = null;
+  let postsFilter = null;
   let rejectedLength = 0;
   let inProgressLength = 0;
 
@@ -36,6 +38,24 @@ const Landing = (props) => {
     el.status === "Rejected" ? rejectedLength++ : null
   );
   inProgressLength = props.posts.length - rejectedLength;
+
+  postsFilter = props.posts.filter((el) => {
+    if (dropdown === "All") {
+      return el;
+    } else if (dropdown === "Applied") {
+      let status = null;
+      status = el.status === "Applied" ? el : null;
+      return status;
+    } else if (dropdown === "Rejected") {
+      let status = null;
+      status = el.status === "Rejected" ? el : null;
+      return status;
+    } else if (dropdown === "Interview Process") {
+      let status = null;
+      status = el.status === "Interview Process" ? el : null;
+      return status;
+    }
+  });
 
   if (show === true) {
     modalToRender = (
@@ -66,7 +86,7 @@ const Landing = (props) => {
   }
 
   if (props.posts.length > 0) {
-    postsOutput = props.posts.map((obj) => (
+    postsOutput = postsFilter.map((obj) => (
       <div className="posts--slice d-flex p-3" key={obj.id}>
         <div className="w-50">
           <div
@@ -112,12 +132,13 @@ const Landing = (props) => {
     ));
   }
 
+  console.log(postsFilter);
   return (
     <div>
       {modalToRender}
       <div
         style={{ fontFamily: "Josefin Sans, sansSerif" }}
-        className="container p-0 pl-sm-15 pr-sm-15"
+        className="container p-2"
       >
         <div className="row ml-2 mr-2 mt-4 pb-4">
           <div className="header col-12 align-self-start">
@@ -129,16 +150,60 @@ const Landing = (props) => {
         </div>
         <div className="row">
           <div className="col-12 col-md-6 applications">
-            <div className="applications--header d-flex flex-row justify-content-between">
+            <div className="applications--header d-flex flex-lg-row flex-column justify-content-between">
               <div className="applications--header__title">Applications</div>
               <div className="applications--header__button d-flex align-items-center mr-3">
                 <div
-                  className="button--add mb-2"
+                  className="button--add mb-2 mr-2"
                   onClick={handleShow}
-                  style={{ font: "black", border: "1px solid black" }}
+                  style={{
+                    font: "black",
+                    border: "1px solid black",
+                    padding: "7.5px 12px",
+                  }}
                 >
                   Add
                 </div>
+                <DropdownButton
+                  className=" button--filter mb-2"
+                  title={dropdown}
+                  style={{
+                    font: "black",
+                    backgroundColor: "white",
+                    border: "1px solid black",
+                    padding: "0",
+                  }}
+                  variant={"white"}
+                >
+                  <Dropdown.Item
+                    onClick={() => {
+                      setDropdown("All");
+                    }}
+                  >
+                    All
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => {
+                      setDropdown("Applied");
+                    }}
+                  >
+                    Applied
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => {
+                      setDropdown("Interview Process");
+                    }}
+                  >
+                    Interview Process
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => {
+                      setDropdown("Rejected");
+                    }}
+                  >
+                    Rejected
+                  </Dropdown.Item>
+                </DropdownButton>
               </div>
             </div>
             <div className="posts">{postsOutput}</div>
@@ -146,7 +211,7 @@ const Landing = (props) => {
           <div className="col-md-6 col-12 pt-1 pt-md-5">
             <div className="statistics pl-2 col-12 mt-4 mt-md-0 pl-md-4 d-flex justify-content-around flex-column p-0">
               <div className="d-flex flex-row justify-content-around">
-                <div className="statistics--padding">
+                <div className="statistics--padding w-md-50 w-lg-80">
                   <div className="statistics--progress mr-1 p-2 pl-sm-4 pr-sm-4">
                     <div className="statistics--progress__num">
                       {inProgressLength}
