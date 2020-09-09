@@ -36,40 +36,11 @@ const TotalJobsChart = (props) => {
   ];
   const COLORS = ["#2c861e", "#de4040", "#fa8e10"];
 
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-    index,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
-
   return (
     <PieChart className="pie-chart" width={300} height={200}>
       <Pie
         classname="test"
         data={data}
-        // cx={300}
-        // cy={200}
         labelLine={false}
         outerRadius={100}
         fill="#8884d8"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Form, Dropdown, DropdownButton } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
@@ -8,27 +8,16 @@ import "./JobForm.scss";
 import Button from "react-bootstrap/Button";
 
 const JobForm = (props) => {
-  const [edit, setEdit] = useState(false);
   const [role, setRole] = useState("");
   const [company, setCompany] = useState("");
   const [location, setLocation] = useState("");
   const [status, setStatus] = useState("Applied");
   const [notes, setNotes] = useState("");
 
-  useEffect(() => {
-    if (props.editMode) {
-      setEdit(props.editMode);
-    }
-  }, []);
-
   const saveJob = (e) => {
     e.preventDefault();
     let id = null;
-    if (edit === false) {
-      id = uuid.v4();
-    } else {
-      id = props.postObj.id;
-    }
+    id = uuid.v4();
 
     const roleInfo = {
       id,

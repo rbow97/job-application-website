@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   Form,
@@ -15,18 +15,12 @@ import Button from "react-bootstrap/Button";
 
 const EditJob = (props) => {
   let id = null;
-  const [edit, setEdit] = useState(false);
+
   const [jobRole, setjobRole] = useState(props.postObj.jobRole);
   const [company, setCompany] = useState(props.postObj.company);
   const [location, setLocation] = useState(props.postObj.location);
   const [status, setStatus] = useState(props.postObj.status);
   const [notes, setNotes] = useState(props.postObj.notes);
-
-  useEffect(() => {
-    if (props.editMode) {
-      setEdit(props.editMode);
-    }
-  }, []);
 
   const handleEdit = (e) => {
     e.preventDefault();
